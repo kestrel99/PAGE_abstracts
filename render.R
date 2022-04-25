@@ -10,7 +10,7 @@ source("data.R")
 
 ## Orals 
 
-lines <- readLines('PAGE2022_Orals.template')
+lines <- readLines('PAGE_Orals.template')
 
 for (a in sort(unique(abstracts_oral$type))) {
   aa <- stringr::str_replace_all(a, "\u0096", "-")
@@ -22,7 +22,7 @@ for (a in sort(unique(abstracts_oral$type))) {
 
 ## Posters
 
-lines <- readLines('PAGE2022_Posters.template')
+lines <- readLines('PAGE_Posters.template')
 
 abstracts_poster <- rbind(abstracts_poster, abstracts_software)
 abstracts_poster$type <- gsub("\u0096", "-", abstracts_poster$type)
