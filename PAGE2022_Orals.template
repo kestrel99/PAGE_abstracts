@@ -1,0 +1,95 @@
+---
+title: "PAGE Abstracts 2022"
+output: 
+  html_document: 
+    toc: yes
+    toc_float: yes
+    theme: yeti
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{css, echo=FALSE}
+
+ /* unvisited link */
+a:link {
+  color: #104E8B;
+}
+
+/* visited link */
+a:visited {
+  color: #104E8B;
+}
+
+/* mouse over link */
+a:hover {
+  color: #104E8B;
+}
+
+/* selected link */
+a:active {
+  color: #104E8B;
+} 
+```
+
+```{r loaddata, include=F}
+
+#source("data.R")
+
+```
+
+```{r loop, echo=F, results='asis'}
+
+template_section <- "
+<hr>
+
+# <b>%s</b>
+
+"
+
+template_body <- "
+<hr>
+
+## <b>%s %s [%s]: %s</b>
+
+<p>%s</p>
+<p><i>%s</i></p>
+
+%s
+
+"
+  
+  curr_section <- "zzzsectionzzz"
+  cat(sprintf(template_section, curr_section))
+
+    if(curr_section=="Oral: Clinical Applications") {
+    cat("_These abstracts are expected to deal with applications of pharmacometrics whose aim is to improve individual patient treatment. They may include studies that have identified covariates that can be applied to calculate the dose, or even better, if the application was able to take patient response (concentration, biomarker) and further improve the individual dose. They can include simulation studies that explore how to improve patient treatment by dose individualization. The abstract must indicate an algorithm demonstrating how an individual patient dose is calculated._\n\n")
+    }
+  
+      if(curr_section=="Oral: Drug/Disease Modelling - Oncology") {
+    cat("_These abstracts are expected to be description of and applications of PK, PKPD, disease progression models for all type of data (continuous, categorical, TTE, count etc, preclinical/clinical/in silico) in oncology. These may have suggestions for clinical practice application as a side-benefit (e.g. covariates) but if that is not the main focus then they do not belong in the Clinical Applications category._\n\n")
+      }
+  
+      if(curr_section=="Oral: Drug/Disease Modelling - Other Topics") {
+    cat("_These abstracts are expected to be description of and applications of PK, PKPD, disease progression models for all type of data (continuous, categorical, TTE, count etc, preclinical/clinical/in silico) in all indications except oncology. These may have suggestions for clinical practice application as a side-benefit (e.g. covariates) but if that is not the main focus then they do not belong in the Clinical Applications category._\n\n")
+    }
+  
+  
+  cat(paste("\nNumber of oral abstracts in this category:", nrow(subset(abstracts_oral, type==curr_section))))
+  
+  for(b in 1:nrow(subset(abstracts_oral, type==curr_section))) {
+    curr_abs <- subset(abstracts_oral, type==curr_section)[b,]
+    writeLines(sprintf(template_body, curr_abs$firstname, curr_abs$lastname, curr_abs$email1, 
+    stringr::str_replace_all(stringr::str_replace_all(stringr::str_replace_all(curr_abs$title, "\u0092", "'"), "\u0093", "'"), "\u0094", "'"),
+    stringr::str_replace_all(curr_abs$author, "\u0092", "'"), 
+    stringr::str_replace_all(curr_abs$affiliation, "\u0092", "'"), 
+    curr_abs$content), useBytes = F)
+  }
+
+
+
+```
+
