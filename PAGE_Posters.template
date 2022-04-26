@@ -43,7 +43,7 @@ a:active {
 
 ```{r loop, echo=F, results='asis'}
 
-abstracts_poster <- rbind(abstracts_poster, abstracts_software)
+#abstracts_poster <- rbind(abstracts_poster, abstracts_software)
 abstracts_poster$type <- gsub("\u0096", "-", abstracts_poster$type)
 abstracts_poster$title <- gsub("\u0096", "-", abstracts_poster$title)
 
