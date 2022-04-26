@@ -3,7 +3,7 @@
 .RData
 .Ruserdata
 .Rproj
-.Rmd
-.html
-.xls
-.zip
+*.xls
+*.zip
+*.html
+*.Rmd
